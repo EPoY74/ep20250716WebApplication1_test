@@ -16,7 +16,15 @@ namespace HttpClietnTestApp
             var builder = WebApplication.CreateBuilder(args);
             var app = builder.Build();
 
-            app.MapGet("/", () => "Hello World!");
+            app.MapGet("/api/users/", () => users);
+            app.MapGet("/api/users/{id}", (int id) =>
+            {
+                Person? user = users.FirstOrDefault(u => u.Id == id);
+                if (user == null) return Results.NotFound(new { message = "Пользователь не найден." });
+                return Results.Json(user);
+            });
+
+            
 
             app.Run();
         }
