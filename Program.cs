@@ -23,7 +23,10 @@ namespace HttpClietnTestApp
                 if (user == null) return Results.NotFound(new { message = "Пользователь не найден." });
                 return Results.Json(user);
             });
+            app.MapDelete("/app/users/{id}", (int id) =>
+            {
 
+            });
             
 
             app.Run();
